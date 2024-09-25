@@ -31,3 +31,13 @@ print:
 
 
 
+
+
+ml OpenMPI/4.1.6-NVHPC-24.1-CUDA-12.4.0
+
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+export OMP_NUM_THREADS=16,1
+
+mpirun -n 4 --map-by ppr:1:socket --bind-to socket ./program.x
+

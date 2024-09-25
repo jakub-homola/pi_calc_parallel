@@ -3,6 +3,7 @@
 #include <chrono>
 #include <algorithm>
 #include <mpi.h>
+#include <omp.h>
 #include "timer.h"
 
 
@@ -23,7 +24,7 @@ int main(int argc, char ** argv)
     {
         printf("Number of intervals: %zu\n", count);
         printf("\n");
-        printf("Calculating PI using MPI with %d processes\n", mpi_size);
+        printf("Calculating PI using MPI with %d processes, each using OpenMPI with %d threads\n", mpi_size, omp_get_max_threads());
         printf("\n");
         printf("...\n");
     }
@@ -41,6 +42,7 @@ int main(int argc, char ** argv)
     size_t my_i_start = mpi_rank * each_count + std::min<size_t>(mpi_rank, leftover);
     size_t my_i_end = (mpi_rank + 1) * each_count + std::min<size_t>(mpi_rank + 1, leftover);
 
+    #pragma omp parallel for reduction(+:total_area_my_rank)
     for(size_t i = my_i_start; i < my_i_end; i++)
     {
         double x_left = i * interval_size;
