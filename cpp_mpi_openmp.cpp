@@ -45,9 +45,7 @@ int main(int argc, char ** argv)
     #pragma omp parallel for reduction(+:total_area_my_rank)
     for(size_t i = my_i_start; i < my_i_end; i++)
     {
-        double x_left = i * interval_size;
-        double x_right = (i+1) * interval_size;
-        double x = (x_left + x_right) / 2;
+        double x = (i+0.5) * interval_size;
 
         double value = 4 / (1 + x * x);
         double area = value * interval_size;
