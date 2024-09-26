@@ -17,6 +17,9 @@ We can estimate the area using the following algorithm. Cut the x-axis into seve
 
 The main point here is, that this algorithm can be easily parallelized. The codes in this repository show how this can be parallelized using multiple parallelization techniques.
 
+QR code leading to this repository:
+
+![qr](img_qr.png)
 
 
 
