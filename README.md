@@ -5,16 +5,18 @@
 
 todo: image in readme and explanation
 
-- sequential
+- sequential - OK
 - pthreads
-- OpenMP
-- MPI
-- MPI4Py
-- OpenMP + MPI
+- OpenMP - OK
+- MPI - OK
+- MPI4Py - OK
+- OpenMP + MPI - OK
 - CUDA 1gpu
 - CUDA multigpu 1 node loop
 - CUDA multigpu 1 node OpenMP
 - CUDA multigpu MPI
+- HIP 1gpu
+- HIP multigpu ...
 
 
 
