@@ -35,14 +35,14 @@ int main(int argc, char ** argv)
     timer.start();
 
     double interval_size = 1.0 / count;
-    double total_area_my_rank = 0;
+    double total_area_my_process = 0;
 
-    size_t each_count = count / mpi_size;
+    size_t count_per_process = count / mpi_size;
     size_t leftover = count % mpi_size;
-    size_t my_i_start = mpi_rank * each_count + std::min<size_t>(mpi_rank, leftover);
-    size_t my_i_end = (mpi_rank + 1) * each_count + std::min<size_t>(mpi_rank + 1, leftover);
+    size_t my_i_start = mpi_rank * count_per_process + std::min<size_t>(mpi_rank, leftover);
+    size_t my_i_end = (mpi_rank + 1) * count_per_process + std::min<size_t>(mpi_rank + 1, leftover);
 
-    #pragma omp parallel for reduction(+:total_area_my_rank)
+    #pragma omp parallel for reduction(+:total_area_my_process)
     for(size_t i = my_i_start; i < my_i_end; i++)
     {
         double x = (i+0.5) * interval_size;
@@ -50,11 +50,11 @@ int main(int argc, char ** argv)
         double value = 4 / (1 + x * x);
         double area = value * interval_size;
 
-        total_area_my_rank += area;
+        total_area_my_process += area;
     }
 
     double total_area;
-    MPI_Reduce(&total_area_my_rank, &total_area, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&total_area_my_process, &total_area, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
     double pi_calculated = total_area;
 
