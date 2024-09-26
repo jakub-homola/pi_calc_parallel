@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
 
     if(mpi_rank == 0)
     {
-        printf("Number of intervals: %zu\n", count);
+        printf("Number of intervals: %zu = %zu million\n", count, count / 1000000);
         printf("\n");
         printf("Calculating PI using MPI with %d processes, each using OpenMPI with %d threads\n", mpi_size, omp_get_max_threads());
         printf("\n");

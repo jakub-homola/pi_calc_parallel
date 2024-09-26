@@ -10,7 +10,7 @@ int main(int argc, char ** argv)
     size_t count = 1000000000;
     if(argc > 1) count = atoll(argv[1]);
 
-    printf("Number of intervals: %zu\n", count);
+    printf("Number of intervals: %zu = %zu million\n", count, count / 1000000);
     printf("\n");
     printf("Calculating PI sequentially\n");
     printf("\n");
