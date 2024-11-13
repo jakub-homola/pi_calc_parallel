@@ -32,9 +32,9 @@ QR code leading to this repository:
 
 ---
 
-my notes, please ignore:
+my notes, feel free to ignore:
 
-ml OpenMPI/4.1.6-NVHPC-24.1-CUDA-12.4.0
+ml mpi4py OpenMPI/4.1.6-NVHPC-24.1-CUDA-12.4.0
 
 export OMP_PLACES=cores
 

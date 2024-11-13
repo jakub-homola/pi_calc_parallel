@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include <chrono>
+#include <cstring>
 #include <algorithm>
 #include <mpi.h>
 #include "timer.h"
@@ -12,7 +12,14 @@ int main(int argc, char ** argv)
     MPI_Init(&argc, &argv);
 
     size_t count = 1000000000;
-    if(argc > 1) count = atoll(argv[1]);
+    if(argc > 1)
+    {
+        count = atoll(argv[1]);
+        char last = *(strchr(argv[1], '\0') - 1);
+        if(last == 'K') count *= 1000;
+        if(last == 'M') count *= 1000000;
+        if(last == 'B') count *= 1000000000;
+    }
 
     int mpi_rank;
     int mpi_size;
@@ -21,7 +28,12 @@ int main(int argc, char ** argv)
 
     if(mpi_rank == 0)
     {
-        printf("Number of intervals: %zu = %zu million\n", count, count / 1000000);
+        char units = ' ';
+        size_t count_to_print = count;
+        if(count > 1000) { units = 'K'; count_to_print = count / 1000; }
+        if(count > 1000000) { units = 'M'; count_to_print = count / 1000000; }
+        if(count > 1000000000) { units = 'B'; count_to_print = count / 1000000000; }
+        printf("Number of intervals: %zu = %zu %c\n", count, count_to_print, units);
         printf("\n");
         printf("Calculating PI using MPI with %d processes\n", mpi_size);
         printf("\n");

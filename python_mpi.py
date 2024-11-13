@@ -7,13 +7,25 @@ from mpi4py import MPI
 
 count = 10000000
 if len(sys.argv) > 1:
-    count = int(sys.argv[1])
+    last = sys.argv[1][-1]
+    if last == 'K' or last == 'M' or last == 'B':
+        count = int(sys.argv[1][0:-1])
+        if last == 'K': count *= 1000
+        if last == 'M': count *= 1000000
+        if last == 'B': count *= 1000000000
+    else:
+        count = int(sys.argv[1])
 
 mpi_rank = MPI.COMM_WORLD.Get_rank()
 mpi_size = MPI.COMM_WORLD.Get_size()
 
 if mpi_rank == 0:
-    print(f"Number of intervals: {count} = {count//1000000} million")
+    unit = ""
+    count_to_print = count
+    if count > 1000: unit = 'K'; count_to_print = count // 1000
+    if count > 1000000: unit = 'M'; count_to_print = count // 1000000
+    if count > 1000000000: unit = 'B'; count_to_print = count // 1000000000
+    print(f"Number of intervals: {count} = {count_to_print} {unit}")
     print()
     print("Calculating PI using mpi4py")
     print()
