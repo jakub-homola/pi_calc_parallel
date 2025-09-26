@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
         if(count > 1000000000) { units = 'B'; count_to_print = count / 1000000000; }
         printf("Number of intervals: %zu = %zu %c\n", count, count_to_print, units);
         printf("\n");
-        printf("Calculating PI using MPI with %d processes, each using OpenMPI with %d threads\n", mpi_size, omp_get_max_threads());
+        printf("Calculating PI using MPI with %d processes, each using OpenMP with %d threads\n", mpi_size, omp_get_max_threads());
         printf("\n");
         printf("...\n");
     }
