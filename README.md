@@ -5,7 +5,7 @@ The common function of all the codes is to estimate the mathematical constant $\
 
 It holds, that
 
-$\pi = \int_0^1 \frac{4}{1+x^2}$
+![PI formula](pi_formula.png)
 
 That is, the area under the curve on the below picture is exactly equal to $\pi$.
 
@@ -34,7 +34,9 @@ QR code leading to this repository:
 
 my notes, feel free to ignore:
 
-ml mpi4py OpenMPI/4.1.6-NVHPC-24.1-CUDA-12.4.0
+ml OpenMPI/5.0.5-NVHPC-24.3-CUDA-12.3.0 Python/3.10.8-GCCcore-12.2.0
+
+mpi4py mam nainstalovane rucne pres pip
 
 export OMP_PLACES=cores
 
